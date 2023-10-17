@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Slab", serif;
+}
+
+nav {
+  background-color: rgb(40, 31, 31);
+  margin-left: 10%;
+  position: relative;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(40, 31, 31);
+  padding-right: 5%;
+}
+
+nav a {
+  display: inline-block;
+  justify-self: start;
+  padding: 15px;
+  font-size: 20px;
+  text-decoration: none;
+  color: lightgray;
+}
+
+nav a::after {
+  content: "/";
+  margin-left: 15px;
+  display: block;
+  color: aquamarine;
+  display: inline-block;
+  position: absolute;
+  pointer-events: none;
+}
+
+header {
+  background-image: url(https://thinhnotes.com/wp-content/uploads/2022/12/cropped-thinhnotes_heading_image_optimized-scaled.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: inherit;
+  text-align: center;
+  color: aliceblue;
+  padding: 15% 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  font-size: 25px;
+}
+
+.announce {
+  text-align: right;
+  color: lightgray;
+  padding: 15px;
+  font-size: 20px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  height: 300px;
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+  text-align: center;
+  font-size: large;
+}
+
+.description {
+  padding: 20px 100px;
+  flex: 40%;
+  text-align: left;
+}
+
+.contact {
+  padding: 20px 100px;
+  flex: 40%;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.section_head {
+  margin: 50px 100px 3px 100px;
+  padding: 10px;
+  padding-left: 100px;
+  background-color: rgb(5, 28, 48);
+  justify-content: space-around;
+  color: white;
+  font-size: 25px;
+}
+
+.content {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(5, 28, 48);
+  justify-content: space-around;
+}
+
+.pinkbgr {
+  background-color: rgb(201, 61, 159);
+}
+
+.product {
+  width: 200px;
+  margin: 20px;
+  background-color: white;
+  padding: 20px;
+}
+
+.product img {
+  width: 100%;
+}

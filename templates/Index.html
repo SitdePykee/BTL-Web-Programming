@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Index</title>
+    <link rel="stylesheet" href="/static/index.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Night Market</h1>
+    </header>
+    <div class="navbar">
+      <nav>
+        <a href="http://127.0.0.1:5000/">Homepage</a>
+        <a href="http://127.0.0.1:5000/search">Search</a>
+        <a href="http://127.0.0.1:5000/login">Login</a>
+        <a href="http://127.0.0.1:5000/register"> Register</a>
+      </nav>
+       <div>
+        {% if username %}
+        <div class="announce">{{username}}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="sales_off">
+      <div class="section_head">
+        <b>Hạ Giá</b>
+      </div>
+      <section class="content">
+        <article class="product">
+          <img
+            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
+            alt=""
+          />
+          Long bào <br />
+          Giá 10tr <br />
+          <button>Mua ngay</button>
+        </article>
+        <article class="product">
+          <img
+            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
+            alt=""
+          />
+          Long bào <br />
+          Giá 10tr <br />
+          <button>Mua ngay</button>
+        </article>
+        <article class="product">
+          <img
+            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
+            alt=""
+          />
+          Long bào <br />
+          Giá 10tr <br />
+          <button>Mua ngay</button>
+        </article>
+        <article class="product">
+          <img
+            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
+            alt=""
+          />
+          Long bào <br />
+          Giá 10tr <br />
+          <button>Mua ngay</button>
+        </article>
+      </section>
+    </div>
+
+    <div class="CKTG">
+      <div class="section_head pinkbgr">Đồ mùa CKTG</div>
+      <section class="content pinkbgr">
+        <article class="product">
+          <img
+            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
+            alt=""
+          />
+          Long bào <br />
+          Giá 10tr <br />
+          <button>Mua ngay</button>
+        </article>
+        <article class="product">
+          <img
+            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
+            alt=""
+          />
+          Long bào <br />
+          Giá 10tr <br />
+          <button>Mua ngay</button>
+        </article>
+      </section>
+    </div>
+    <footer>
+      <div class="description">
+        <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>
+        <br />
+        <p>
+          Với kinh nghiệm 200 năm buôn bán quần áo, chúng tôi tự tin đem đến cho
+          bạn những trải nghiệm tuyệt vời nhất các bạn có thể tìm thấy trên
+          Internet
+        </p>
+      </div>
+      <div class="contact">
+        <b>Liên hệ:</b> 0352449984<br />
+        <b>Gmail:</b> abcxyz@gmail.com
+      </div>
+    </footer>
+  </body>
+</html>
