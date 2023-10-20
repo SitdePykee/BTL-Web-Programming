@@ -33,6 +33,7 @@ def check_register(username, password):
         error = True
     conn.close()
     return error
+
 def insert_user(username, email, password):
     sqldbname = 'db/website.db'
     conn = sqlite3.connect(sqldbname)
@@ -41,6 +42,12 @@ def insert_user(username, email, password):
     cursor.execute(sqlcommand)
     conn.commit()
     conn.close()
+
+def clothes_data():
+    sqldbname = 'db/clothes.db'
+    conn = sqlite3.connect(slqdbname)
+    cursor = conn.cursor()
+    sqlcommand = "Select * from clothes"
 
 #================================================================================================================================
 
