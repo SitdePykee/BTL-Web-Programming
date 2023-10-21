@@ -60,7 +60,7 @@ def Index():
     username = ""
     data = []
     for i in range(4):
-        data.append(get_clothes_data(i))
+        data.append(get_clothes_data(i + 1))
     print(data)
     return render_template("Index.html", username=username, data = data)
 
