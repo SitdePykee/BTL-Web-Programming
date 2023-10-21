@@ -29,7 +29,6 @@
         {% endif %}
       </div>
     </div>
-
     <div class="sales_off">
       <div class="section_head">
         <b>Hạ Giá</b>
@@ -38,17 +37,16 @@
         {% for i in range(4) %}
         <article class="product">
           <img
-            src="{{ data[i][3] }}"
+            src="{{ clothes[i][3] }}"
             alt=""
           />
-          {{ data[i][1] }} <br />
-          Giá {{ data[i][4] }}$ <br />
+          {{ clothes[i][1] }} <br />
+          Giá {{ clothes[i][4] }}$ <br />
           <button>Mua ngay</button>
         </article>
         {% endfor %}
       </section>
     </div>
-
     <div class="CKTG">
       <div class="section_head pinkbgr">Đồ mùa CKTG</div>
       <section class="content pinkbgr">

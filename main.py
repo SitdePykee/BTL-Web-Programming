@@ -62,7 +62,7 @@ def Index():
     for i in range(4):
         data.append(get_clothes_data(i + 1))
     print(data)
-    return render_template("Index.html", username=username, data = data)
+    return render_template("Index.html", username=username, clothes = data)
 
 #================================================================================================================================
 
@@ -78,7 +78,10 @@ def login():
         password = request.form['password']
         if check_exists(username, password):
             session['username'] = username
-            return render_template("Index.html", username=session['username'])
+            data = []
+            for i in range(4):
+                data.append(get_clothes_data(i + 1))
+            return render_template("Index.html", username=session['username'], clothes = data)
         else:
             error = True
     return render_template("login.html", error=error)
