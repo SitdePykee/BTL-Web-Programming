@@ -43,11 +43,17 @@ def insert_user(username, email, password):
     conn.commit()
     conn.close()
 
-def clothes_data():
-    sqldbname = 'db/clothes.db'
-    conn = sqlite3.connect(slqdbname)
-    cursor = conn.cursor()
-    sqlcommand = "Select * from clothes"
+def clothes_data(search_text):
+    if(search_text != ''):
+        sqldbname = 'db/clothes.db'
+        conn = sqlite3.connect(slqdbname)
+        cursor = conn.cursor()
+        sqlcommand = "Select * from clothes where tags like '%" + search_text + "%'"
+
+        cursor.execute(sqlcommand)
+        data = cursor.fetchall()
+        conn.close()
+    return data
 
 #================================================================================================================================
 
@@ -91,6 +97,10 @@ def register():
         return render_template("Index.html")
     else:
         return render_template("register.html", error = error)
+
+@app.route("/search")
+def search_clothes():
+    return render_template("search.html")
 
 #================================================================================================================================
 

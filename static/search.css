@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Slab", serif;
+}
+
+nav {
+  display: block;
+  background-color: rgb(40, 31, 31);
+  position: relative;
+  padding-left: 10%;
+}
+
+nav a {
+  display: inline-block;
+  padding: 15px;
+  font-size: 20px;
+  text-decoration: none;
+  font-family: "Roboto Slab", serif;
+  color: lightgray;
+}
+
+nav a::after {
+  content: "/";
+  margin-left: 15px;
+  display: block;
+  color: aquamarine;
+  display: inline-block;
+  position: absolute;
+  pointer-events: none;
+}
+
+header {
+  background-image: url(https://thinhnotes.com/wp-content/uploads/2022/12/cropped-thinhnotes_heading_image_optimized-scaled.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: inherit;
+  text-align: center;
+  color: aliceblue;
+  padding: 15% 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  font-size: 25px;
+}
+
+.searchform {
+  background-color: white;
+  padding: 50px;
+  margin: 10% 30% 10% 30%;
+}
+
+.formhead {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 10%;
+}
+
+.searchform input {
+  background-color: lightgray;
+  width: 100%;
+  padding: 5px 20px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.searchform button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px 30px;
+}
+
+.description {
+  padding: 20px 100px;
+  flex: 50%;
+  text-align: left;
+}
+
+.contact {
+  padding: 20px 100px;
+  flex: 40%;
+}
+
+body {
+  background-color: lightgray;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  height: 300px;
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+  text-align: center;
+  font-size: large;
+}

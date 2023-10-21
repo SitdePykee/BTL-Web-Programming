@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/static/login.css" />
+    <link rel="stylesheet" href="linhtinh.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,39 +22,21 @@
       <a href="http://127.0.0.1:5000/login">Login</a>
       <a href="http://127.0.0.1:5000/register"> Register</a>
     </nav>
-    <div class="loginform">
+    <div class="searchform">
       <div class="formhead">
-        <h1>Xin chào</h1>
-        Đăng kí tài khoản của bạn
+        <h1>Tìm kiếm</h1>
       </div>
-      <hr>
-      <br>
-      <form action="/register" method="POST">
-        <b> Username:</b> <br />
+      <hr />
+      <br />
+      <form action="/search" method="POST">
+        <b> Bạn cần tìm:</b> <br />
         <input
           type="text"
-          name="username"
-          class="username"
-          placeholder="Nhập tên tài khoản..."
+          name="search_text"
+          placeholder="Nhập loại đồ cần tìm..."
         />
         <br />
-        <b>Email:</b> <br />
-        <input
-          type="text"
-          name="email"
-          class="email"
-          placeholder="Nhập email..."
-        />
-        <b> Password:</b> <br />
-        <input
-          type="password"
-          name="password"
-          class="password"
-          placeholder="Nhập mật khẩu..."
-        />
-        <br />
-        <button type="submit">Register</button> <br />
-        {% if error: %} Tài khoản đã tồn tại {% endif %}
+        <button type="submit">Tìm kiếm</button> <br />
       </form>
     </div>
     <footer>
