@@ -98,8 +98,11 @@ def register():
     email = request.form['email']
     error = check_register(username, password)
     if not error:
+        data = []
+        for i in range(4):
+            data.append(get_clothes_data(i + 1))
         insert_user(username, email, password)
-        return render_template("Index.html")
+        return render_template("Index.html", clothes = data)
     else:
         return render_template("register.html", error = error)
 
