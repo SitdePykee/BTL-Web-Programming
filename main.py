@@ -8,11 +8,11 @@ app.secret_key = "27eduCBA09"
 #================================================================================================================================
 def check_exists(username,password):
     result = False
-    sqldbname = 'db/website.db'
+    sqldbname = 'db/clothes.db'
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
 
-    sqlcommand = "Select * from user where name = '"+username+"' and password = '"+password+"'"
+    sqlcommand = "Select * from user where username = '"+username+"' and password = '"+password+"'"
     cursor.execute(sqlcommand)
     data = cursor.fetchall()
     if len(data) > 0:
@@ -22,11 +22,11 @@ def check_exists(username,password):
 
 def check_register(username, password):
     error = False
-    sqldbname = 'db/website.db'
+    sqldbname = 'db/clothes.db'
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
 
-    sqlcommand = "Select * from user where name = '" + username + "'"
+    sqlcommand = "Select * from user where username = '" + username + "'"
     cursor.execute(sqlcommand)
     data = cursor.fetchall()
     if len(data) > 0:
@@ -35,24 +35,22 @@ def check_register(username, password):
     return error
 
 def insert_user(username, email, password):
-    sqldbname = 'db/website.db'
+    sqldbname = 'db/clothes.db'
     conn = sqlite3.connect(sqldbname)
     cursor = conn.cursor()
-    sqlcommand = "Insert into user(name,email,password) values ('" + username + "', '" + username + "@gmail.com', '" + password + "')"
+    sqlcommand = "Insert into user(username,gmail,password) values ('" + username + "', '"+ email +"', '" + password + "')"
     cursor.execute(sqlcommand)
     conn.commit()
     conn.close()
 
-def clothes_data(search_text):
-    if(search_text != ''):
-        sqldbname = 'db/clothes.db'
-        conn = sqlite3.connect(slqdbname)
-        cursor = conn.cursor()
-        sqlcommand = "Select * from clothes where tags like '%" + search_text + "%'"
+def get_clothes_data(id):
+    sqldbname = 'db/clothes.db'
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    sqlcommand = "Select * from clothes where id = '"+ str(id) +"'"
+    cursor.execute(sqlcommand)
 
-        cursor.execute(sqlcommand)
-        data = cursor.fetchall()
-        conn.close()
+    data = cursor.fetchone()
     return data
 
 #================================================================================================================================
@@ -60,7 +58,11 @@ def clothes_data(search_text):
 @app.route("/")
 def Index():
     username = ""
-    return render_template("Index.html", username=username)
+    data = []
+    for i in range(4):
+        data.append(get_clothes_data(i))
+    print(data)
+    return render_template("Index.html", username=username, data = data)
 
 #================================================================================================================================
 
@@ -101,6 +103,7 @@ def register():
 @app.route("/search")
 def search_clothes():
     return render_template("search.html")
+
 
 #================================================================================================================================
 

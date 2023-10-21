@@ -35,42 +35,17 @@
         <b>Hạ Giá</b>
       </div>
       <section class="content">
+        {% for i in range(4) %}
         <article class="product">
           <img
-            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
+            src="{{ data[i][3] }}"
             alt=""
           />
-          Long bào <br />
-          Giá 10tr <br />
+          {{ data[i][1] }} <br />
+          Giá {{ data[i][4] }}tr <br />
           <button>Mua ngay</button>
         </article>
-        <article class="product">
-          <img
-            src="https://raw.githubusercontent.com/SitdePykee/BTL-Web-Programming/main/db/images/cardiganxanh.png"
-            alt=""
-          />
-          Long bào <br />
-          Giá 10tr <br />
-          <button>Mua ngay</button>
-        </article>
-        <article class="product">
-          <img
-            src="https://raw.githubusercontent.com/SitdePykee/BTL-Web-Programming/main/db/images/aokhoact1.png"
-            alt=""
-          />
-          Long bào <br />
-          Giá 10tr <br />
-          <button>Mua ngay</button>
-        </article>
-        <article class="product">
-          <img
-            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
-            alt=""
-          />
-          Long bào <br />
-          Giá 10tr <br />
-          <button>Mua ngay</button>
-        </article>
+        {% endfor %}
       </section>
     </div>
 
