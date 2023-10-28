@@ -95,3 +95,19 @@ footer {
   text-align: center;
   font-size: large;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+  padding: 8px 0;
+  color: #333;
+}
+
+li:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}

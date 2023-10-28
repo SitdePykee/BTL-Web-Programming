@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="linhtinh.css" />
+    <link rel="stylesheet" href="/static/search.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,6 +39,23 @@
         <button type="submit">Tìm kiếm</button> <br />
       </form>
     </div>
+    <p> {% if search_text %} Kết quả cho {{ search_text }} </p>
+
+    <div class="result">
+      <ul>
+       {% for row in data %}
+       <li>
+         {{ row[1] }}
+         <br>
+         <img src="{{ row[3] }}">
+       </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+
     <footer>
       <div class="description">
         <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>

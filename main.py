@@ -53,6 +53,18 @@ def get_clothes_data(id):
     data = cursor.fetchone()
     return data
 
+def search_clothes(search_text):
+    if search_text != "":
+        sqldbname = 'db/clothes.db'
+        conn = sqlite3.connect(sqldbname)
+        cursor = conn.cursor()
+        sqlcommand = "Select * from clothes where tags like '%" + search_text + "%'"
+
+        cursor.execute(sqlcommand)
+        data = cursor.fetchall()
+        conn.close()
+    return data
+
 #================================================================================================================================
 
 @app.route("/")
@@ -107,8 +119,14 @@ def register():
         return render_template("register.html", error = error)
 
 @app.route("/search")
-def search_clothes():
+def search_clothes_form():
     return render_template("search.html")
+
+@app.route("/search", methods=["POST"])
+def search_result():
+    search_text = request.form['search_text']
+    data = search_clothes(search_text)
+    return render_template("search.html", data = data, search_text = search_text)
 
 
 #================================================================================================================================
