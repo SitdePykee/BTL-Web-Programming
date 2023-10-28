@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/static/search.css" />
+    <link rel="stylesheet" href="/static/login.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,40 +22,14 @@
       <a href="http://127.0.0.1:5000/login">Login</a>
       <a href="http://127.0.0.1:5000/register"> Register</a>
     </nav>
-    <div class="searchform">
-      <div class="formhead">
-        <h1>Tìm kiếm</h1>
-      </div>
-      <hr />
-      <br />
-      <form action="/search" method="POST">
-        <b> Bạn cần tìm:</b> <br />
-        <input
-          type="text"
-          name="search_text"
-          placeholder="Nhập loại đồ cần tìm..."
-        />
-        <br />
-        <button type="submit">Tìm kiếm</button> <br />
-      </form>
-    </div>
-    <p> {% if search_text %} Kết quả cho {{ search_text }} </p>
-
-    <div class="result">
-      <ul>
-       {% for row in data %}
-       <li>
-         {{ row[1]}}
-         <br>
-         <img src="{{ row[3] }}">
-       </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+    {% block content %}
 
 
 
+
+
+
+    {% endblock %}
     <footer>
       <div class="description">
         <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>
