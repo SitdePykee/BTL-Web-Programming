@@ -83,7 +83,7 @@ def get_items():
         data.append(get_clothes_data(i + 1))
 
     total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
-    current_page_items = data[start_index:end_index]
+    current_page_items = data[start_index:start_index + min(items_per_page, len(data) - start_index)]
 
     return current_page_items, total_pages, page
 
