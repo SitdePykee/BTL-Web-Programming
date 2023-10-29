@@ -16,12 +16,14 @@
     <header>
       <h1>Night Market</h1>
     </header>
+    <div class="navbar">
     <nav>
       <a href="http://127.0.0.1:5000/">Homepage</a>
       <a href="http://127.0.0.1:5000/search">Search</a>
       <a href="http://127.0.0.1:5000/login">Login</a>
       <a href="http://127.0.0.1:5000/register"> Register</a>
     </nav>
+    </div>
     <div class="searchform">
       <div class="formhead">
         <h1>Tìm kiếm</h1>
@@ -45,7 +47,7 @@
       <ul>
        {% for row in data %}
        <li>
-         {{ row[1] }}
+         {{ row[1]}}
          <br>
          <img src="{{ row[3] }}">
        </li>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -65,14 +65,11 @@ def search_clothes(search_text):
         conn.close()
     return data
 
-<<<<<<< HEAD
-=======
 def get_items():
     data = []
     items_per_page = 12
     page = request.args.get('page', 1, type=int)
     start_index = (page - 1) * items_per_page
-    end_index = start_index + items_per_page
 
     sqldbname = 'db/clothes.db'
     conn = sqlite3.connect(sqldbname)
@@ -86,26 +83,21 @@ def get_items():
 
     total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
     current_page_items = data[start_index:start_index + min(items_per_page, len(data) - start_index)]
+    number_of_item = len(current_page_items)
+    return current_page_items, total_pages, page, number_of_item
 
-    return current_page_items, total_pages, page
-
->>>>>>> parent of 09339b4 (m)
 #================================================================================================================================
 
 @app.route("/")
 def Index():
-    username = ""
-<<<<<<< HEAD
-    data = []
-    for i in range(4):
-        data.append(get_clothes_data(i + 1))
-    print(data)
-    return render_template("Index.html", username=username, clothes = data)
-=======
-    current_page_items, total_pages, page = get_items()
-    return render_template("Index.html",clothes = current_page_items,
-                           total_pages = total_pages, current_page = page)
->>>>>>> parent of 09339b4 (m)
+    current_page_items, total_pages, page, number_of_item = get_items()
+    if 'username' in session:
+        return render_template("logged-in-index.html", username=session['username'],
+                                   clothes = current_page_items,total_pages = total_pages, current_page = page,
+                                   number_of_item = number_of_item)
+    else:
+        return render_template("Index.html",clothes = current_page_items,
+                           total_pages = total_pages, current_page = page, number_of_item = number_of_item)
 
 #================================================================================================================================
 
@@ -121,20 +113,19 @@ def login():
         password = request.form['password']
         if check_exists(username, password):
             session['username'] = username
-<<<<<<< HEAD
-            data = []
-            for i in range(4):
-                data.append(get_clothes_data(i + 1))
-            return render_template("Index.html", username=session['username'], clothes = data)
-=======
-            current_page_items, total_pages, page = get_items()
+            current_page_items, total_pages, page, number_of_item = get_items()
             return render_template("logged-in-index.html", username=session['username'],
-                                   clothes = current_page_items,total_pages = total_pages, current_page = page)
->>>>>>> parent of 09339b4 (m)
+                                   clothes = current_page_items,total_pages = total_pages, current_page = page,
+                                   number_of_item = number_of_item)
         else:
             error = True
     return render_template("login.html", error=error)
 
+#================================================================================================================================
+@app.route("/logout")
+def log_out():
+    session.pop('username', None)
+    return redirect(url_for('Index'))
 #================================================================================================================================
 
 @app.route("/register")
@@ -147,24 +138,16 @@ def register():
     email = request.form['email']
     error = check_register(username, password)
     if not error:
-        data = []
-        for i in range(4):
-            data.append(get_clothes_data(i + 1))
         insert_user(username, email, password)
-<<<<<<< HEAD
-        return render_template("Index.html", clothes = data)
-=======
-        current_page_items, total_pages, page = get_items()
+        current_page_items, total_pages, page, number_of_item = get_items()
         return render_template("Index.html",clothes = current_page_items,total_pages = total_pages,
-                               current_page = page)
->>>>>>> parent of 09339b4 (m)
+                               current_page = page, number_of_item = number_of_item)
     else:
         return render_template("register.html", error = error)
-
+#================================================================================================================================
 @app.route("/search")
 def search_clothes_form():
     return render_template("search.html")
-
 @app.route("/search", methods=["POST"])
 def search_result():
     search_text = request.form['search_text']

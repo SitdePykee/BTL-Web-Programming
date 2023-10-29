@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Index</title>
-    <link rel="stylesheet" href="/static/index.css" />
+    <link rel="stylesheet" href="static/index.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,26 +23,15 @@
         <a href="http://127.0.0.1:5000/login">Login</a>
         <a href="http://127.0.0.1:5000/register"> Register</a>
       </nav>
-       <div>
-        {% if username %}
-        <div class="announce">{{username}}</div>
-        {% endif %}
-      </div>
     </div>
-    <div class="sales_off">
-      <div class="section_head">
-        <b>CKTG</b>
-      </div>
+    <div class="main">
       <section class="content">
-<<<<<<< HEAD
-        {% for i in range(4) %}
-=======
-        {% for i in range(12) %}
->>>>>>> parent of 09339b4 (m)
+        {% for i in range(number_of_item) %}
         <article class="product">
           <img
             src="{{ clothes[i][3] }}"
             alt=""
+            class="zoom-able-image"
           />
           {{ clothes[i][1] }} <br />
           Giá {{ clothes[i][4] }}$ <br />
@@ -50,29 +39,35 @@
         </article>
         {% endfor %}
       </section>
+      <div class="categories">
+        <div class="categories_head"><b>Categories</b></div>
+        <hr />
+        <div class="menu">
+          <ul>
+            <li>Quần dài</li>
+            <li>Áo phông</li>
+            <li>Áo có cổ</li>
+            <li>Áo khoác</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="section_head pinkbgr">Hạ giá</div>
-      <section class="content pinkbgr">
-        <article class="product">
-          <img
-            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
-            alt=""
-          />
-          Long bào <br />
-          Giá 10tr <br />
-          <button>Mua ngay</button>
-        </article>
-        <article class="product">
-          <img
-            src="https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/October2023/trang.jpg"
-            alt=""
-          />
-          Long bào <br />
-          Giá 10tr <br />
-          <button>Mua ngay</button>
-        </article>
-      </section>
+    <div class="pagination">
+        {% if current_page > 1 %}
+        <a href="/?page={{ current_page - 1 }}" class="pagination-button"> < </a>
+        {% endif %}
+
+        {% for page in range(1, total_pages + 1) %}
+            {% if page == current_page %}
+                <span class="current-page">{{ page }}</span>
+            {% else %}
+                <a href="/?page={{ page }}" class="other-page">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if current_page < total_pages %}
+        <a href="/?page={{ current_page + 1 }}" class="pagination-button"> > </a>
+        {% endif %}
     </div>
     <footer>
       <div class="description">

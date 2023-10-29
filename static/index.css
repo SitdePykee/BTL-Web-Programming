@@ -6,7 +6,6 @@
 nav {
   background-color: rgb(40, 31, 31);
   margin-left: 10%;
-  position: relative;
 }
 
 .navbar {
@@ -14,6 +13,10 @@ nav {
   justify-content: space-between;
   background-color: rgb(40, 31, 31);
   padding-right: 5%;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  left: 0;
 }
 
 nav a {
@@ -48,6 +51,9 @@ header {
   left: 0;
   top: 0;
   font-size: 25px;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .announce {
@@ -83,29 +89,10 @@ body {
   background-color: lightgray;
 }
 
-.section_head {
-  margin: 50px 100px 3px 100px;
-  padding: 10px;
-  padding-left: 100px;
-  background-color: rgb(5, 28, 48);
-  justify-content: space-around;
-  color: white;
-  font-size: 25px;
-}
-
 .content {
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 100px;
+  width: 75%;
   padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: rgb(5, 28, 48);
-  justify-content: space-around;
-}
-
-.pinkbgr {
-  background-color: rgb(201, 61, 159);
+  margin-left: 70px;
 }
 
 .product {
@@ -113,8 +100,76 @@ body {
   margin: 20px;
   background-color: white;
   padding: 20px;
+  display: inline-block;
+}
+
+.main {
+  display: flex;
+}
+
+.categories {
+  width: 25%;
+  margin: 100px 40px 20px 20px;
+  background-color: white;
+  height: 300px;
+}
+
+.categories_head {
+  text-align: center;
+  padding: 10px;
+}
+
+.menu {
+  padding: 10px;
+}
+
+.menu > ul > li {
+  padding: 5px;
+}
+
+.menu > ul > li:hover {
+  background-color: aquamarine;
+  cursor: pointer;
 }
 
 .product img {
   width: 100%;
 }
+
+.zoom-able-image {
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.zoom-able-image:hover {
+  transform: scale(1.5);
+}
+
+.pagination {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  margin-right: 470px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+  font-size: 25px;
+}
+
+.current-page {
+  padding: 5px 12px;
+  background-color: aquamarine;
+}
+
+.other-page{
+  padding: 5px 12px;
+  text-decoration: none;
+  color: black;
+}
+
+.pagination-button{
+  padding: 5px 12px;
+  text-decoration: none;
+  color: black;
+}
+
+
