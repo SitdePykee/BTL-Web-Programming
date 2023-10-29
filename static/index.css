@@ -144,3 +144,32 @@ body {
 .zoom-able-image:hover {
   transform: scale(1.5);
 }
+
+.pagination {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  margin-right: 470px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+  font-size: 25px;
+}
+
+.current-page {
+  padding: 5px 12px;
+  background-color: aquamarine;
+}
+
+.other-page{
+  padding: 5px 12px;
+  text-decoration: none;
+  color: black;
+}
+
+.pagination-button{
+  padding: 5px 12px;
+  text-decoration: none;
+  color: black;
+}
+
+
