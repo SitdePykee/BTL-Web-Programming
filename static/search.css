@@ -3,6 +3,17 @@
   font-family: "Roboto Slab", serif;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(40, 31, 31);
+  padding-right: 5%;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+}
+
 nav {
   display: block;
   background-color: rgb(40, 31, 31);
