@@ -71,10 +71,20 @@ def get_items():
     page = request.args.get('page', 1, type=int)
     start_index = (page - 1) * items_per_page
     end_index = start_index + items_per_page
-    for i in range(48):
+
+    sqldbname = 'db/clothes.db'
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    sqlcommand = "SELECT MAX(id) FROM clothes"
+    cursor.execute(sqlcommand)
+    max_item = cursor.fetchone()
+
+    for i in range(max_item[0] + 1):
         data.append(get_clothes_data(i + 1))
-        current_page_items = data[start_index:end_index]
-        total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
+
+    total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
+    current_page_items = data[start_index:end_index]
+
     return current_page_items, total_pages, page
 
 #================================================================================================================================
