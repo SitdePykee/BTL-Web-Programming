@@ -79,7 +79,7 @@ def get_items():
     cursor.execute(sqlcommand)
     max_item = cursor.fetchone()
 
-    for i in range(max_item[0] + 1):
+    for i in range(max_item[0]):
         data.append(get_clothes_data(i + 1))
 
     total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
