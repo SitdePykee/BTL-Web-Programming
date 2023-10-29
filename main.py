@@ -65,11 +65,7 @@ def search_clothes(search_text):
         conn.close()
     return data
 
-#================================================================================================================================
-
-@app.route("/")
-def Index():
-    username = ""
+def get_items():
     data = []
     items_per_page = 12
     page = request.args.get('page', 1, type=int)
@@ -79,8 +75,15 @@ def Index():
         data.append(get_clothes_data(i + 1))
         current_page_items = data[start_index:end_index]
         total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
+    return current_page_items, total_pages, page
 
-    return render_template("Index.html", username=username, clothes = current_page_items,
+#================================================================================================================================
+
+@app.route("/")
+def Index():
+    username = ""
+    current_page_items, total_pages, page = get_items()
+    return render_template("Index.html",clothes = current_page_items,
                            total_pages = total_pages, current_page = page)
 
 #================================================================================================================================
@@ -97,10 +100,9 @@ def login():
         password = request.form['password']
         if check_exists(username, password):
             session['username'] = username
-            data = []
-            for i in range(12):
-                data.append(get_clothes_data(i + 1))
-            return render_template("Index.html", username=session['username'], clothes = data)
+            current_page_items, total_pages, page = get_items()
+            return render_template("logged-in-index.html", username=session['username'],
+                                   clothes = current_page_items,total_pages = total_pages, current_page = page)
         else:
             error = True
     return render_template("login.html", error=error)
@@ -117,11 +119,10 @@ def register():
     email = request.form['email']
     error = check_register(username, password)
     if not error:
-        data = []
-        for i in range(12):
-            data.append(get_clothes_data(i + 1))
         insert_user(username, email, password)
-        return render_template("Index.html", clothes = data)
+        current_page_items, total_pages, page = get_items()
+        return render_template("Index.html", username=session['username'],
+                               clothes = current_page_items,total_pages = total_pages, current_page = page)
     else:
         return render_template("register.html", error = error)
 

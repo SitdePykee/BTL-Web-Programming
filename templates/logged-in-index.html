@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Index</title>
+    <link rel="stylesheet" href="static/index.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Night Market</h1>
+    </header>
+    <div class="navbar">
+      <nav>
+        <a href="http://127.0.0.1:5000/">Homepage</a>
+        <a href="http://127.0.0.1:5000/search">Search</a>
+        <a href="http://127.0.0.1:5000/cart">My cart</a>
+      </nav>
+      <div>
+        <div class="announce">{{username}}</div>
+      </div>
+    </div>
+    <div class="main">
+      <section class="content">
+        {% for i in range(12) %}
+        <article class="product">
+          <img
+            src="{{ clothes[i][3] }}"
+            alt=""
+            class="zoom-able-image"
+          />
+          {{ clothes[i][1] }} <br />
+          Giá {{ clothes[i][4] }}$ <br />
+          <button>Mua ngay</button>
+        </article>
+        {% endfor %}
+      </section>
+      <div class="categories">
+        <div class="categories_head"><b>Categories</b></div>
+        <hr />
+        <div class="menu">
+          <ul>
+            <li>Quần dài</li>
+            <li>Áo phông</li>
+            <li>Áo có cổ</li>
+            <li>Áo khoác</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="pagination">
+        {% if current_page > 1 %}
+        <a href="/?page={{ current_page - 1 }}" class="pagination-button"> < </a>
+        {% endif %}
+
+        {% for page in range(1, total_pages + 1) %}
+            {% if page == current_page %}
+                <span class="current-page">{{ page }}</span>
+            {% else %}
+                <a href="/?page={{ page }}" class="other-page">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if current_page < total_pages %}
+        <a href="/?page={{ current_page + 1 }}" class="pagination-button"> > </a>
+        {% endif %}
+    </div>
+    <footer>
+      <div class="description">
+        <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>
+        <br />
+        <p>
+          Với kinh nghiệm 200 năm buôn bán quần áo, chúng tôi tự tin đem đến cho
+          bạn những trải nghiệm tuyệt vời nhất các bạn có thể tìm thấy trên
+          Internet
+        </p>
+      </div>
+      <div class="contact">
+        <b>Liên hệ:</b> 0352449984<br />
+        <b>Gmail:</b> abcxyz@gmail.com
+      </div>
+    </footer>
+  </body>
+</html>
