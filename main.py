@@ -71,10 +71,17 @@ def search_clothes(search_text):
 def Index():
     username = ""
     data = []
-    for i in range(4):
+    items_per_page = 12
+    page = request.args.get('page', 1, type=int)
+    start_index = (page - 1) * items_per_page
+    end_index = start_index + items_per_page
+    for i in range(48):
         data.append(get_clothes_data(i + 1))
-    print(data)
-    return render_template("Index.html", username=username, clothes = data)
+        current_page_items = data[start_index:end_index]
+        total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
+
+    return render_template("Index.html", username=username, clothes = current_page_items,
+                           total_pages = total_pages, current_page = page)
 
 #================================================================================================================================
 
@@ -91,7 +98,7 @@ def login():
         if check_exists(username, password):
             session['username'] = username
             data = []
-            for i in range(4):
+            for i in range(12):
                 data.append(get_clothes_data(i + 1))
             return render_template("Index.html", username=session['username'], clothes = data)
         else:
@@ -111,7 +118,7 @@ def register():
     error = check_register(username, password)
     if not error:
         data = []
-        for i in range(4):
+        for i in range(12):
             data.append(get_clothes_data(i + 1))
         insert_user(username, email, password)
         return render_template("Index.html", clothes = data)
