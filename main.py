@@ -121,8 +121,8 @@ def register():
     if not error:
         insert_user(username, email, password)
         current_page_items, total_pages, page = get_items()
-        return render_template("Index.html", username=session['username'],
-                               clothes = current_page_items,total_pages = total_pages, current_page = page)
+        return render_template("Index.html",clothes = current_page_items,total_pages = total_pages,
+                               current_page = page)
     else:
         return render_template("register.html", error = error)
 
