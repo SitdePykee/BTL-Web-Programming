@@ -112,7 +112,7 @@ body {
   width: 25%;
   margin: 100px 40px 20px 20px;
   background-color: white;
-  height: 300px;
+  height: 50%
 }
 
 .categories_head {
@@ -126,6 +126,7 @@ body {
 
 .menu > ul > li {
   padding: 5px;
+  color: black;
 }
 
 .menu > ul > li:hover {
@@ -172,5 +173,6 @@ body {
   text-decoration: none;
   color: black;
 }
+
 
 
