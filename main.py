@@ -65,7 +65,7 @@ def search_clothes(search_text):
         conn.close()
     return data
 
-def get_items():
+def get_items_default():
     data = []
     items_per_page = 12
     page = request.args.get('page', 1, type=int)
@@ -107,7 +107,7 @@ def get_items_with_categories(category):
 
 @app.route("/")
 def Index():
-    current_page_items, total_pages, page, number_of_item = get_items()
+    current_page_items, total_pages, page, number_of_item = get_items_default()
     if 'username' in session:
         return render_template("logged-in-index.html", username=session['username'],
                                    clothes = current_page_items,total_pages = total_pages, current_page = page,
@@ -130,7 +130,7 @@ def login():
         password = request.form['password']
         if check_exists(username, password):
             session['username'] = username
-            current_page_items, total_pages, page, number_of_item = get_items()
+            current_page_items, total_pages, page, number_of_item = get_items_default()
             return render_template("logged-in-index.html", username=session['username'],
                                    clothes = current_page_items,total_pages = total_pages, current_page = page,
                                    number_of_item = number_of_item)
@@ -156,7 +156,7 @@ def register():
     error = check_register(username, password)
     if not error:
         insert_user(username, email, password)
-        current_page_items, total_pages, page, number_of_item = get_items()
+        current_page_items, total_pages, page, number_of_item = get_items_default()
         return render_template("Index.html",clothes = current_page_items,total_pages = total_pages,
                                current_page = page, number_of_item = number_of_item)
     else:
