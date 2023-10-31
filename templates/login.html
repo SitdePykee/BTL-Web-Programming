@@ -1,5 +1,29 @@
-{% extends 'base.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Night Market</title>
+    <link rel="stylesheet" href="/static/login.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Night Market</h1>
+    </header>
+    <div class="navbar">
+      <nav>
+        <a href="http://127.0.0.1:5000/">Homepage</a>
+        <a href="http://127.0.0.1:5000/search">Search</a>
+        <a href="http://127.0.0.1:5000/login">Login</a>
+        <a href="http://127.0.0.1:5000/register">Register</a>
+      </nav>
+    </div>
     <div class="loginform">
       <div class="formhead">
         <h1>Xin chào</h1>
@@ -28,4 +52,21 @@
         {% if error: %} Sai tài khoản hoặc mật khẩu {% endif %}
       </form>
     </div>
-{% endblock %}
+    <footer>
+      <div class="description">
+        <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>
+        <br />
+        <p>
+          Với kinh nghiệm 200 năm buôn bán quần áo, chúng tôi tự tin đem đến cho
+          bạn những trải nghiệm tuyệt vời nhất các bạn có thể tìm thấy trên
+          Internet
+        </p>
+      </div>
+      <div class="contact">
+        <b>Liên hệ:</b> 0352449984<br />
+        <b>Gmail:</b> abcxyz@gmail.com
+      </div>
+    </footer>
+  </body>
+</html>
+
