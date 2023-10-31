@@ -1,0 +1,47 @@
+{% extends 'logged-in-base.html' %}
+{% block content %}
+    <section class="product-form">
+        <div class="container">
+            <div class="product-content row">
+                <div class="product-left row">
+                    <div class="product-left-img">
+                        <img src="{{ clothes[i][3] }}" alt="">
+                    </div>   
+                </div>
+                <div class="product-right">
+                    <div class="product-right-name">
+                        <h1>{{ clothes[i][1] }}</h1>
+                        <p>Id sản phẩm: 1923MS</p>
+                    </div>
+                    <div class="product-right-price">
+                        <p>{{ clothes[i][4] }}$</p>
+                    </div>
+                    <div class="product-right-desc">
+                        <p style="font-weight: bold;">Mô tả sản phẩm:</p>
+                        <p>Một chút mô tả về sản phẩm có thể thêm hoặc không</p>
+                    </div>
+                    <!--db chưa có size :v-->
+                    <div class="product-right-size">
+                        <p style="font-weight: bold;">Size:</p>
+                        <div class="size">
+                            <span>S</span>
+                            <span>M</span>
+                            <span>L</span>
+                            <span>XL</span>
+                            <span>XXL</span>
+                            <span>3XL</span>
+                        </div>
+                    </div>
+                    <div class="quantity">
+                        <p style="font-weight: bold;">Số lượng:</p>
+                        <input type="number" min="0" value="1">
+                    </div>
+                    <div class="product-right-button">
+                        <button><p>Mua hàng</p></button>
+                        <button><p>Thêm vào giỏ hàng</p></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
