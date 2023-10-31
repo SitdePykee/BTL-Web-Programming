@@ -58,7 +58,7 @@ def search_clothes(search_text):
         sqldbname = 'db/clothes.db'
         conn = sqlite3.connect(sqldbname)
         cursor = conn.cursor()
-        sqlcommand = "Select * from clothes where tags like '%" + search_text + "%'"
+        sqlcommand = "Select * from clothes where tags like '%" + search_text + "%' or product like '%" + search_text + "%' or brand like '%" + search_text + "%'"
 
         cursor.execute(sqlcommand)
         data = cursor.fetchall()
@@ -77,9 +77,26 @@ def get_items():
     sqlcommand = "SELECT MAX(id) FROM clothes"
     cursor.execute(sqlcommand)
     max_item = cursor.fetchone()
-
     for i in range(max_item[0]):
         data.append(get_clothes_data(i + 1))
+
+    total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
+    current_page_items = data[start_index:start_index + min(items_per_page, len(data) - start_index)]
+    number_of_item = len(current_page_items)
+    return current_page_items, total_pages, page, number_of_item
+
+def get_items_with_categories(category):
+    data = []
+    items_per_page = 12
+    page = request.args.get('page', 1, type=int)
+    start_index = (page - 1) * items_per_page
+
+    sqldbname = 'db/clothes.db'
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    sqlcommand = "Select * from clothes where tags like '%" + category + "%'"
+    cursor.execute(sqlcommand)
+    data = cursor.fetchall()
 
     total_pages = len(data) // items_per_page + (1 if len(data) % items_per_page > 0 else 0)
     current_page_items = data[start_index:start_index + min(items_per_page, len(data) - start_index)]
@@ -147,13 +164,31 @@ def register():
 #================================================================================================================================
 @app.route("/search")
 def search_clothes_form():
-    return render_template("search.html")
+    if 'username' in session:
+        return render_template("logged-in-search.html", username=session['username'])
+    else:
+        return render_template("search.html")
+
 @app.route("/search", methods=["POST"])
 def search_result():
     search_text = request.form['search_text']
     data = search_clothes(search_text)
-    return render_template("search.html", data = data, search_text = search_text)
-
+    if 'username' in session:
+        return render_template("logged-in-search.html", username=session['username'],
+                               data = data, search_text = search_text)
+    else:
+        return render_template("search.html", data = data, search_text = search_text)
+#================================================================================================================================
+@app.route("/item")
+def item_w_category():
+    category = request.args.get('category')
+    current_page_items, total_pages, page, number_of_item = get_items_with_categories(category)
+    if 'username' in session:
+        return render_template("logged-in-item.html",clothes = current_page_items, username=session['username'],
+                                total_pages = total_pages, current_page = page, number_of_item = number_of_item, category = category)
+    else:
+        return render_template("item.html", clothes=current_page_items,
+                               total_pages=total_pages, current_page=page, number_of_item=number_of_item, category = category)
 
 #================================================================================================================================
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Night Market</title>
-    <link rel="stylesheet" href="/static/login.css" />
+    <link rel="stylesheet" href="/static/search.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,18 +20,56 @@
       <nav>
         <a href="http://127.0.0.1:5000/">Homepage</a>
         <a href="http://127.0.0.1:5000/search">Search</a>
-        <a href="http://127.0.0.1:5000/login">Login</a>
-        <a href="http://127.0.0.1:5000/register">Register</a>
+        <a href="http://127.0.0.1:5000/cart">My cart</a>
+        <a href="http://127.0.0.1:5000/logout">Logout</a>
       </nav>
+      <div>
+        <div class="announce">{{username}}</div>
+      </div>
     </div>
-    {% block content %}
+    <div class="searchform">
+      <div class="formhead">
+        <h1>Tìm kiếm</h1>
+      </div>
+      <hr />
+      <br />
+      <form action="/search" method="POST">
+        <b> Bạn cần tìm:</b> <br />
+        <input
+          type="text"
+          name="search_text"
+          placeholder="Nhập loại đồ cần tìm..."
+        />
+        <br />
+        <button type="submit">Tìm kiếm</button> <br />
+      </form>
+    </div>
+    <hr>
+    <p> {% if search_text %} Kết quả cho {{ search_text }} </p>
 
+    <div class="result">
+      <ul>
+       {% for row in data %}
+       <li>
+         <div class="info">
+           {{ row[1] }}
+           <br>
+           {{ row[5] }}
+           <br>
+           Hãng: {{ row[2] }}
+           <br>
+           Giá: {{ row[4] }}$
+           <br>
+           Tồn kho: {{ row[6] }}
+         </div>
+         <hr>
+         <img src="{{ row[3] }}">
+       </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
 
-
-
-
-
-    {% endblock %}
     <footer>
       <div class="description">
         <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>

@@ -1,6 +1,12 @@
 * {
   box-sizing: border-box;
   font-family: "Roboto Slab", serif;
+  text-decoration: none;
+}
+
+nav {
+  background-color: rgb(40, 31, 31);
+  margin-left: 10%;
 }
 
 .navbar {
@@ -14,19 +20,12 @@
   left: 0;
 }
 
-nav {
-  display: block;
-  background-color: rgb(40, 31, 31);
-  position: relative;
-  padding-left: 10%;
-}
-
 nav a {
   display: inline-block;
+  justify-self: start;
   padding: 15px;
   font-size: 20px;
   text-decoration: none;
-  font-family: "Roboto Slab", serif;
   color: lightgray;
 }
 
@@ -53,6 +52,16 @@ header {
   left: 0;
   top: 0;
   font-size: 25px;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.announce {
+  text-align: right;
+  color: lightgray;
+  padding: 15px;
+  font-size: 20px;
 }
 
 .searchform {
@@ -114,12 +123,22 @@ ul {
 
 li {
   margin: 0;
-  padding: 8px 0;
+  padding: 10px;
   color: #333;
+  display: flex;
 }
 
 li:hover {
   background-color: aliceblue;
   cursor: pointer;
+}
 
+.info{
+  width: 50%;
+  font-weight: bold;
+}
+
+li > img {
+  width: 10%;
+  align: right;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Night Market</title>
-    <link rel="stylesheet" href="/static/login.css" />
+    <link rel="stylesheet" href="/static/index.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,9 +20,12 @@
       <nav>
         <a href="http://127.0.0.1:5000/">Homepage</a>
         <a href="http://127.0.0.1:5000/search">Search</a>
-        <a href="http://127.0.0.1:5000/login">Login</a>
-        <a href="http://127.0.0.1:5000/register">Register</a>
+        <a href="http://127.0.0.1:5000/cart">My Cart</a>
+        <a href="http://127.0.0.1:5000/logout">Logout</a>
       </nav>
+      <div>
+        <div class="announce">{{username}}</div>
+      </div>
     </div>
     {% block content %}
 
