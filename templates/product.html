@@ -1,47 +1,106 @@
 {% extends 'base.html' %}
 {% block content %}
-    <section class="product-form">
+    <script src="/new-script.js" async defer></script>
         <div class="container">
-            <div class="product-content row">
-                <div class="product-left row">
-                    <div class="product-left-img">
-                        <img src="{{ clothes[i][3] }}" alt="">
-                    </div>   
-                </div>
-                <div class="product-right">
-                    <div class="product-right-name">
-                        <h1>{{ clothes[i][1] }}</h1>
-                        <p>Id sản phẩm: 1923MS</p>
+            <div class="left">
+                <img class="product-img" src="{{clothes[3]}}" alt="">
+            </div>
+            <div class="right">
+                <div class="right-content">
+                    <div class="name">
+                        <h1> {{clothes[1] }}</h1>
                     </div>
-                    <div class="product-right-price">
-                        <p>{{ clothes[i][4] }}$</p>
+                    <div class="brand">
+                        <h2>Hãng: </h2><p>{{ clothes[2]}}</p>
                     </div>
-                    <div class="product-right-desc">
-                        <p style="font-weight: bold;">Mô tả sản phẩm:</p>
-                        <p>Một chút mô tả về sản phẩm có thể thêm hoặc không</p>
+                    <div class="price">
+                        <h1>Giá: </h1><p id="price" style="font-weight: bold;">{{ clothes[4] }}$</p>
                     </div>
-                    <!--db chưa có size :v-->
-                    <div class="product-right-size">
-                        <p style="font-weight: bold;">Size:</p>
-                        <div class="size">
-                            <span>S</span>
-                            <span>M</span>
-                            <span>L</span>
-                            <span>XL</span>
-                            <span>XXL</span>
-                            <span>3XL</span>
+                    <div class="item_description">
+                        <h2>Mô tả sản phẩm</h2>
+                        <p>
+                          linh ngu an cut cho
+                        </p>
+                    </div>
+                    <div class="size">
+                        <h2>Size: </h2>
+                        <div class="size-option">
+                            <span class="option" onclick="selectOption('S')">S</span>
+                            <span class="option" onclick="selectOption('M')">M</span>
+                            <span class="option" onclick="selectOption('L')">L</span>
+                            <span class="option" onclick="selectOption('XL')">XL</span>
+                            <span class="option" onclick="selectOption('XXL')">XXL</span>
                         </div>
                     </div>
                     <div class="quantity">
-                        <p style="font-weight: bold;">Số lượng:</p>
-                        <input type="number" min="0" value="1">
+                        <h2>Chọn số lượng:</h2>
+                        <div class="amount-input">
+                            <button class="minus" onclick="minus()">-</button>
+                            <input type="text" id="amount" value="1">
+                            <button class="plus" onclick="plus()">+</button>
+                        </div>
                     </div>
-                    <div class="product-right-button">
-                        <button><p>Mua hàng</p></button>
-                        <button><p>Thêm vào giỏ hàng</p></button>
+                    <div class="action-buttons">
+                        <button>Mua ngay</button>
+                        <button class="add-to-cart" id="add-to-cart" onclick="addToCart()">Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+<script>
+  let amountElement = document.getElementById('amount');
+let amount = amountElement.value;
+function minus(){
+    if (amount > 1)
+        amount--;
+    amountElement.value = amount;
+}
+function plus(){
+    amount++;
+    amountElement.value = amount;
+}
+amountElement.addEventListener('input', () => {
+    amount = amountElement.value;
+    amount = parseInt(amount);
+    amount = (isNaN(amount) || amount==0)?1:amount;
+    amountElement.value = amount;
+});
+
+function getDetail(){
+    let imgElement = document.getElementsByClassName('product-img');
+    let img = imgElement
+}
+function addToCart() {
+    alert("Đã đưa hàng vào giỏ")
+}
+
+ function selectOption(size) {
+  var elements = document.getElementsByClassName("option");
+    console.log(elements);
+  var hasCurrent = false;
+  var selectedSize = "";
+
+  var elementList = [];
+  for (var i = 0; i < elements.length; i++) elementList.push(elements[i]);
+
+  elementList.forEach((e) => {
+    if (e.classList.contains("current")) {
+      hasCurrent = true;
+      selectedSize = e.innerText;
+
+      e.classList.remove("current");
+    }
+  });
+
+  if (size != selectedSize) {
+    elementList.forEach((e) => {
+      if (e.innerText == size) {
+        e.classList.add("current");
+      }
+    });
+  }
+}
+
+
+</script>
 {% endblock %}

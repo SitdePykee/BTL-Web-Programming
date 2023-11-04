@@ -35,10 +35,16 @@
           />
           {{ clothes[i][1] }} <br />
           Giá {{ clothes[i][4] }}$ <br />
-          <button>Mua ngay</button>
+          <button onclick="redirect({{clothes[i][0]}})">Mua ngay</button>
         </article>
         {% endfor %}
       </section>
+      <script>
+        function redirect(id){
+        console.log("a");
+          window.location.href = "/product?id="+id;
+        }
+        </script>
       <div class="categories">
         <div class="categories_head"><b>Categories</b></div>
         <hr />

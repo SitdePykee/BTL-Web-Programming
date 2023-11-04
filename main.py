@@ -77,6 +77,7 @@ def get_items_default():
     sqlcommand = "SELECT MAX(id) FROM clothes"
     cursor.execute(sqlcommand)
     max_item = cursor.fetchone()
+    cursor.close()
     for i in range(max_item[0]):
         data.append(get_clothes_data(i + 1))
 
@@ -191,7 +192,12 @@ def item_w_category():
                                total_pages=total_pages, current_page=page, number_of_item=number_of_item, category = category)
 
 #================================================================================================================================
+@app.route("/product")
+def display_product():
+    id = request.args.get('id')
+    clothes = get_clothes_data(id)
+    return render_template("product.html", clothes = clothes)
 
-
+#================================================================================================================================
 if __name__ == '__main__':
     app.run()
