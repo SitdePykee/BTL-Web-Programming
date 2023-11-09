@@ -82,14 +82,31 @@ header {
 }
 
 .description {
-  padding: 20px 100px;
-  flex: 50%;
+  padding: 20px 20px;
+  width: 39%;
   text-align: left;
 }
 
 .contact {
-  padding: 20px 100px;
-  flex: 40%;
+  padding: 20px 20px;
+}
+
+.contact > a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.contact > a:hover {
+  color: #24262b;
+  background-color: #ffffff;
 }
 
 body {
