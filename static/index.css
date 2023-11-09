@@ -195,7 +195,7 @@ body {
 }
 
 .zoom-able-image:hover {
-  transform: scale(1.5);
+  transform: scale(1.4);
 }
 
 .pagination {
