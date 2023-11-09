@@ -4,6 +4,21 @@
   text-decoration: none;
 }
 
+.custom-button {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  transition: all ease 0.5s;
+  border-radius: 20px;
+  height: 30px;
+  width: 100px;
+  font-size: 15px;
+}
+
+.custom-button:hover {
+  background-color: white;
+  color: black;
+}
+
 nav {
   background-color: rgb(40, 31, 31);
   margin-left: 10%;

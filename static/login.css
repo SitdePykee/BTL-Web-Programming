@@ -3,6 +3,21 @@
   font-family: "Roboto Slab", serif;
 }
 
+.custom-button {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  transition: all ease 0.5s;
+  border-radius: 20px;
+  height: 30px;
+  width: 100px;
+  font-size: 15px;
+}
+
+.custom-button:hover {
+  background-color: white;
+  color: black;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
