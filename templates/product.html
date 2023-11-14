@@ -20,6 +20,7 @@
                         <h2>Mô tả sản phẩm</h2>
                         <p> <pre style="text-wrap: wrap;">{{clothes[7]}}</pre> </p>
                     </div>
+                    <form action="cart" method="POST" >
                     <div class="size">
                         <h2>Size: </h2>
                         <div class="size-option">
@@ -39,9 +40,10 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button>Mua ngay</button>
+                        <button onclick=>Mua ngay</button>
                         <button class="add-to-cart" id="add-to-cart" onclick="addToCart()">Thêm vào giỏ hàng</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -69,8 +71,34 @@ function getDetail(){
     let img = imgElement
 }
 function addToCart() {
-    alert("Đã đưa hàng vào giỏ")
-}
+    // Lấy giá trị id, size và quantity từ các phần tử HTML
+    var id = '{{ clothes[0] }}';
+    var sizeElements = document.getElementsByClassName("option current");
+    var size = sizeElements.length > 0 ? sizeElements[0].innerText : "";
+    var quantity = parseInt(document.getElementById("amount").value);
+
+    // Tạo một đối tượng chứa các giá trị
+    var data = {
+      id: id,
+      size: size,
+      quantity: quantity
+    };
+
+    // Gửi Ajax request để gửi dữ liệu đến server
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/cart/add", true);
+    xhr.open("GET", "/cart/add", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // Xử lý phản hồi từ server (nếu cần)
+        var response = JSON.parse(xhr.responseText);
+        console.log(response);
+      }
+    };
+    xhr.send(JSON.stringify(data));
+
+  }
 
  function selectOption(size) {
   var elements = document.getElementsByClassName("option");

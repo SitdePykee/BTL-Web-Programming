@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Night Market</title>
+  <link rel="stylesheet" href="/static/cart.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  />
+</head>
+<body>
+  <header>
+    <h1>Night Market</h1>
+  </header>
+  <div class="navbar">
+    <nav>
+      <a href="http://127.0.0.1:5000/">Homepage</a>
+      <a href="http://127.0.0.1:5000/search">Search</a>
+      <a href="http://127.0.0.1:5000/cart">My Cart</a>
+      <a href="http://127.0.0.1:5000/logout">Logout</a>
+    </nav>
+    <div>
+      <div class="announce">{{username}}</div>
+    </div>
+  </div>
+      <div class="cart">
+        <h1 class="title" style="text-align: center">Giỏ hàng</h1>
+        <div class="product-cart">
+          <div class="product-header">
+            <h5 class="product-img">Sản phẩm</h5>
+            <h5 class="product-name">Tên sản phẩm</h5>
+            <h5 class="product-price">Giá</h5>
+            <h5 class="quantity">Số lượng</h5>
+            <h5 class="total">Tổng</h5>
+          </div>
+          <div class="items">
+              {% for i in session['cart'] %}
+            <div class="item-in">
+              <div class="product-img">
+                <img
+                  src=" {{ i['img'] }}"
+                  class="cart-img"
+                />
+              </div>
+              <div class="product-name">{{ i['name'] }}</div>
+              <div class="product-price">
+                  {{ i['price'] }}
+                <div>$</div>
+              </div>
+              <div class="quantity">
+                <div class="amount-input">
+                  <input type="hidden" value="{{ i['id'] }}" >
+                  <button class="minus" onclick="minus(this)">-</button>
+                  <input type="text" class="amount" value="{{ i['quantity'] }}" />
+                  <button class="plus" onclick="plus(this)">+</button>
+                  <input type="hidden" value="{{ i['id'] }}" >
+                </div>
+              </div>
+              <div class="total partial-total">
+                {{ (i['price'] | int) * (i['quantity'] | int) }}
+                <div>$</div>
+              </div>
+              <button
+                class="remove-button custom-button"
+                onclick="removeItem(this)"
+              >
+                X
+              </button>
+              <input type="hidden" value="{{ i['id'] }}" >
+            </div>
+              {% endfor %}
+          </div>
+          <hr />
+          <h2 class="total-amount">Tổng tiền:  $</h2>
+        </div>
+        <hr />
+        <div class="cart-button">
+          <button class="custom-button" onclick="deleteCart()">
+            Xóa giỏ hàng
+          </button>
+          <button class="custom-button">Mua</button>
+        </div>
+      </div>
+
+      <footer>
+        <div class="description">
+          <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>
+          <br />
+          <hr />
+          <p>
+            Với kinh nghiệm 200 năm buôn bán quần áo, chúng tôi tự tin đem đến cho
+            bạn những trải nghiệm tuyệt vời nhất các bạn có thể tìm thấy trên
+            Internet
+          </p>
+        </div>
+        <div class="contact">
+          <b>Liên hệ</b> <br />
+          <hr />
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a> <br />
+          <a
+            style="width: 200px; border-radius: 20px"
+            href="http://127.0.0.1:3000/BTL-WebDesign/about-us.html"
+          >
+            About Us</a
+          >
+        </div>
+      </footer>
+    </body>
+    <script>
+      function saveToCart(id, amount, type){
+      let data = {"id": id, "quantity" : amount, "type": type}
+        fetch("/cart/update", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {"Content-Type": "application/json"}
+        })
+      }
+      function minus(button) {
+        let id = button.previousElementSibling.value;
+        let amountElement = button.nextElementSibling;
+        let amount = parseInt(amountElement.value);
+
+        if (amount > 1) {
+          amount--;
+          amountElement.value = amount;
+
+          var parent = button.closest(".item-in");
+          var partialTotalElement = parent.querySelector(".partial-total");
+          var priceElement = parent.querySelector(".product-price");
+          var price = parseInt(priceElement.textContent.trim());
+
+          partialTotalElement.textContent = price * amount + "$";
+          total();
+          saveToCart(id, amount, "UPDATE")
+        }
+      }
+
+      function plus(button) {
+        let id = button.nextElementSibling.value;
+        let amountElement = button.previousElementSibling;
+        let amount = parseInt(amountElement.value);
+        amount++;
+        amountElement.value = amount;
+
+        var parent = button.closest(".item-in");
+        var partialTotalElement = parent.querySelector(".partial-total");
+        var priceElement = parent.querySelector(".product-price");
+        var price = parseInt(priceElement.textContent.trim());
+
+        partialTotalElement.textContent = price * amount + "$";
+        total();
+        saveToCart(id, amount, "UPDATE")
+      }
+      function removeItem(button) {
+        var parent = button.closest(".item-in");
+        parent.remove();
+        total();
+        let id = button.nextElementSibling.value;
+        saveToCart(id, 0, "DELETE_ONE")
+      }
+      function deleteCart() {
+        var itemInElements = document.querySelectorAll(".item-in");
+
+        itemInElements.forEach(function (element) {
+          element.remove();
+        });
+        total();
+        saveToCart("",0, "DELETE_ALL")
+      }
+      function total() {
+        const partialTotalElements = document.querySelectorAll(".partial-total");
+        let totalAmount = 0;
+
+        partialTotalElements.forEach((element) => {
+          const partialTotal = parseFloat(element.textContent.replace("$", ""));
+          if (!isNaN(partialTotal)) {
+            totalAmount += partialTotal;
+          }
+        });
+        const totalAmountElement = document.querySelector(".total-amount");
+        totalAmountElement.textContent = `Tổng tiền: ${totalAmount.toFixed(2)} $`;
+      }
+      window.addEventListener("load", function() {
+        total();
+      });
+    </script>
+  </html>

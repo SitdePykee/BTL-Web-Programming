@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -122,7 +122,6 @@ def Index():
 @app.route("/login")
 def formlogin():
     return render_template("login.html")
-
 @app.route("/login",methods=['POST'])
 def login():
     error = False
@@ -142,7 +141,7 @@ def login():
 #================================================================================================================================
 @app.route("/logout")
 def log_out():
-    session.pop('username', None)
+    session.clear()
     return redirect(url_for('Index'))
 #================================================================================================================================
 
@@ -196,8 +195,71 @@ def item_w_category():
 def display_product():
     id = request.args.get('id')
     clothes = get_clothes_data(id)
-    return render_template("product.html", clothes = clothes)
+    if("username" in session):
+        return render_template("logged-in-product.html", clothes = clothes)
+    else:
+        return render_template("product.html", clothes=clothes)
 
+#================================================================================================================================
+
+@app.route("/cart")
+def display_cart():
+
+    return render_template("cart.html")
+
+@app.route('/cart/add', methods=['POST','GET'])
+def add_to_cart():
+    # Lấy giá trị id, size và quantity từ dữ liệu gửi lên
+    data = request.json
+    id = data['id']
+    clothes = get_clothes_data(id)
+    clothes_dict = {
+        "id": id,
+        "name": clothes[1],
+        "img": clothes[3],
+        "price": clothes[4],
+        "quantity": int(data['quantity']),
+        "size": data['size']
+    }
+
+    print(clothes_dict)
+
+    cart = session.get('cart', [])
+    found = False;
+    for item in cart:
+        if item["id"] == id:
+            item["quantity"] = int(item["quantity"])
+            if "quantity" not in item:
+                item["quantity"] = 0  # Gán giá trị ban đầu
+            item["quantity"] += int(clothes_dict["quantity"])
+            found = True
+            break
+    if not found:
+        cart.append(clothes_dict)
+    session['cart'] = cart
+
+    response = {'message': 'Thêm vào giỏ hàng thành công'}
+    return render_template("cart.html")
+
+@app.route("/cart/update", methods=['POST'])
+def update_cart():
+    cart = session['cart']
+    data = request.json
+    t = data["type"]
+    new_quantity = data["quantity"]
+    if t == "UPDATE":
+        for i in cart:
+            if i['id'] == data["id"]:
+                i['quantity'] = new_quantity
+    elif t == "DELETE_ONE":
+        for i in cart:
+            if i['id'] == data["id"]:
+                cart.remove(i)
+    else:
+        cart.clear()
+    session['cart'] = cart
+
+    return render_template("cart.html")
 #================================================================================================================================
 if __name__ == '__main__':
     app.run()

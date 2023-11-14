@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Slab", serif;
+  text-decoration: none;
+}
+
+.custom-button {
+  background-color: white;
+  color: black;
+  transition: all ease 0.5s;
+  border-radius: 20px;
+  height: 50px;
+  width: 200px;
+  font-size: 15px;
+}
+
+.custom-button:hover {
+  background-color: black;
+  color: white;
+}
+
+nav {
+  background-color: rgb(40, 31, 31);
+  margin-left: 10%;
+  display: flex;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(40, 31, 31);
+  padding-right: 5%;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+}
+
+nav a {
+  display: inline-block;
+  justify-self: start;
+  padding: 15px;
+  font-size: 20px;
+  text-decoration: none;
+  color: lightgray;
+}
+
+nav a::after {
+  content: "/";
+  margin-left: 15px;
+  display: block;
+  color: aquamarine;
+  display: inline-block;
+  position: absolute;
+  pointer-events: none;
+}
+
+.parent {
+  display: flex;
+  flex-direction: column;
+}
+
+.child {
+  visibility: hidden;
+  height: 3px;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.parent:hover > a {
+  font-weight: 600;
+}
+
+.parent:hover .child {
+  visibility: visible;
+  font-weight: 600;
+}
+
+header {
+  background-image: url(https://thinhnotes.com/wp-content/uploads/2022/12/cropped-thinhnotes_heading_image_optimized-scaled.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: inherit;
+  text-align: center;
+  color: aliceblue;
+  padding: 15% 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  font-size: 25px;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-around;
+  text-align: center;
+  font-size: large;
+}
+
+.description {
+  padding: 20px 20px;
+  width: 500px;
+  text-align: left;
+}
+
+.contact {
+  width: 300px;
+  padding: 20px 20px;
+}
+
+.contact > a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.contact > a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.cart {
+  background-color: white;
+  margin: 10%;
+  border-radius: 50px;
+}
+
+.title {
+  padding: 20px;
+}
+
+.items {
+  min-height: 200px;
+}
+
+.product-cart {
+  max-width: 85%;
+  justify-content: space-around;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.product-header {
+  width: 100%;
+  max-width: 85%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-bottom: 4px solid black;
+  margin: 10px auto;
+  font-size: x-large;
+}
+
+.product-img {
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+.product-name {
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+.product-price {
+  width: 10%;
+  display: flex;
+}
+.quantity {
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.total {
+  width: 10%;
+  display: flex;
+  align-items: center;
+}
+.item-in {
+  width: 85%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 10px 0px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  align-items: center;
+}
+.cart-img {
+  width: 80px;
+  height: auto;
+}
+
+.cart-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.cart-button > button {
+  margin: 20px;
+}
+.quantity button {
+  text-align: center;
+  border: 1px solid rgb(0, 0, 0);
+  cursor: pointer;
+  background-color: white;
+  height: 25px;
+  width: 25px;
+  border-radius: 50px;
+}
+.quantity button:hover {
+  background-color: black;
+  color: white;
+}
+.quantity input {
+  border: white;
+  background-color: white;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  padding: 5px;
+}
+
+.remove-button {
+  height: 30px;
+  width: 60px;
+}
