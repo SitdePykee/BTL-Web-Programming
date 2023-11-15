@@ -38,9 +38,9 @@
                             <button class="plus" onclick="plus()">+</button>
                         </div>
                     </div>
-                    <div class="action-buttons">
-                        <button onclick=>Mua ngay</button>
-                        <button class="add-to-cart custom-button" id="add-to-cart" onclick="addToCart()">Thêm vào giỏ hàng</button>
+                    <div class="action-buttons" style="display: flex; justify-content: space-evenly">
+                        <button onclick="buyNow()">Mua ngay</button>
+                        <button class="add-to-cart" id="add-to-cart" onclick="addToCart()">Thêm vào giỏ hàng</button>
                     </div>
                 </div>
             </div>
@@ -89,6 +89,29 @@ function addToCart() {
     })
 
     alert("Đã thêm vào giỏ hàng");
+  }
+
+  function buyNow() {
+    // Lấy giá trị id, size và quantity từ các phần tử HTML
+    var id = '{{ clothes[0] }}';
+    var sizeElements = document.getElementsByClassName("option current");
+    var size = sizeElements.length > 0 ? sizeElements[0].innerText : "";
+    var quantity = parseInt(document.getElementById("amount").value);
+
+    // Tạo một đối tượng chứa các giá trị
+    var data = {
+      id: id,
+      size: size,
+      quantity: parseInt(quantity)
+    };
+
+    fetch("/cart/add", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"}
+    }).then((e) => {
+      window.location.href = "http://127.0.0.1:5000/cart"
+    });
   }
 
  function selectOption(size) {

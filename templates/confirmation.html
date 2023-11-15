@@ -28,21 +28,22 @@
         <a href="http://127.0.0.1:5000/logout">Logout</a>
       </nav>
       <div>
-        <div class="announce">{{username}}</div>
+        <div class="announce"> {{username}} </div>
       </div>
     </div>
     <div class="loginform">
       <div class="formhead">
         <h1>Xác nhận</h1>
-        <p style="opacity: 0.4">Đơn hàng số #12345</p>
       </div>
       <hr />
       <br />
       <form action="/confirmation" method="GET">
-        <p><b> Tên người dùng:</b> Huy Hoàng</p>
+        <p><b> Tên người dùng:</b>{{ username }}</p>
         <b> Số điện thoại người nhận:</b> <br />
-        <input required name="phonenumber" placeholder="Nhập số điện thoại..." />
-        <p><b> Giá trị đơn hàng:</b> 180$</p>
+        <input required name="phoneNumber" placeholder="Nhập số điện thoại..." />
+        <p><b> Giá trị đơn hàng:</b> {{ total }}$</p>
+        <input value="{{ total }}" type="hidden">
+        <input value="{{ product_id }}" type="hidden">
         <b> Địa chỉ giao hàng:</b> <br />
         <input
           name="delivery-address"
@@ -67,10 +68,14 @@
           <input name="payment" type="hidden" id="payment" required>
         </div>
         <br />
-        <b> Card Number: </b> <br />
-        <input name="delivery-address" required placeholder="Nhập mã số thẻ..." />
+        <div id="card_number" style="display: none;">
+          <b> Card Number: </b> <br />
+          <input name="card_number" id="card_number_input" required placeholder="Nhập mã số thẻ..." />
+        </div>
+
+        <script></script>
         <div class="buttons">
-          <button class="custom-button">Quay lại giỏ hàng</button>
+          <button class="custom-button" onclick="redirect()">Quay lại giỏ hàng</button>
           <button class="custom-button" type="submit">Confirm</button>
         </div>
       </form>
@@ -115,12 +120,28 @@
 
       if (!isCurrent) {
         option.classList.add("current");
+
+        selectPayment(option.id)
+        if(option.id == "Visa" || option.id == "Mastercard"){
+          document.getElementById("card_number").style.display = "block"
+          document.getElementById("card_number_input").setAttribute("required","")
+        }
+        else {
+          document.getElementById("card_number").style.display = "none"
+          document.getElementById("card_number_input").removeAttribute("required")
+        }
       }
-      selectPayment(option.id)
+      else {
+              document.getElementById("card_number").style.display = "none"
+      }
     }
+
     function selectPayment(type){
       let payment = document.getElementById("payment")
       payment.value = type
+    }
+    function redirect(){
+      window.location.href = "http://127.0.0.1:5000/cart"
     }
   </script>
 </html>

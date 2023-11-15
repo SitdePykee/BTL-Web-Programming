@@ -43,6 +43,7 @@ def insert_user(username, email, password):
     conn.commit()
     conn.close()
 
+
 def get_clothes_data(id):
     sqldbname = 'db/clothes.db'
     conn = sqlite3.connect(sqldbname)
@@ -222,7 +223,6 @@ def add_to_cart():
         "size": data['size']
     }
 
-    print(clothes_dict)
 
     cart = session.get('cart', [])
     found = False;
@@ -261,8 +261,20 @@ def update_cart():
 
     return render_template("cart.html")
 #================================================================================================================================
-@app.route("/confirmation")
-def confirmation():
+@app.route("/confirmation/")
+def confirmation_display():
+    data = session["order"]
+    total = data["total"]
+    product_id = data["product_id"]
+    username = session["username"]
+
+    return render_template("confirmation.html",total = total, product_id = product_id, username = username)
+@app.route("/confirmation/submit", methods=["POST", "GET"])
+def confirmation_submit():
+    data = request.json
+    if "order" not in session:
+        session["order"] = []
+    session["order"] = data
     return render_template("confirmation.html")
 
 #================================================================================================================================

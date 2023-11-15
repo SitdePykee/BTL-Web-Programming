@@ -75,12 +75,13 @@
               >
                 X
               </button>
-              <input type="hidden" value="{{ i['id'] }}" >
+              <input type="hidden" class="product_id" value="{{ i['id'] }}" >
             </div>
               {% endfor %}
           </div>
           <hr />
           <h2 class="total-amount">Tổng tiền:  $</h2>
+          <input type="hidden" id="total" value="total()">
         </div>
         <hr />
         <div class="cart-button">
@@ -179,7 +180,8 @@
         total();
         saveToCart("",0, "DELETE_ALL")
       }
-      function total() {
+
+      function calculateTotal() {
         const partialTotalElements = document.querySelectorAll(".partial-total");
         let totalAmount = 0;
 
@@ -189,14 +191,36 @@
             totalAmount += partialTotal;
           }
         });
+
+        return totalAmount
+      }
+      function total() {
         const totalAmountElement = document.querySelector(".total-amount");
-        totalAmountElement.textContent = `Tổng tiền: ${totalAmount.toFixed(2)} $`;
+        totalAmountElement.textContent = `Tổng tiền: ${calculateTotal().toFixed(2)} $`;
       }
       window.addEventListener("load", function() {
         total();
       });
       function confirm(){
-
+        let ids = []
+        let collection = document.getElementsByClassName('product_id');
+        for(var i = 0; i < collection.length; i++) {
+          ids.push(collection[i].value);
+        }
+        let product_id = Array.from(ids);
+        product_id = product_id.join(",");
+        let total = document.getElementById("total").value
+        let data = {
+          product_id: product_id,
+          total: parseInt(calculateTotal())
+        }
+        fetch("/confirmation/submit", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {"Content-Type": "application/json"}
+        }).then((e) => {
+          window.location.href = "http://127.0.0.1:5000/confirmation"
+        });
       }
     </script>
   </html>
