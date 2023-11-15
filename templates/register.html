@@ -35,12 +35,14 @@
         Đăng kí tài khoản của bạn
       </div>
       <hr>
+      {% if error: %} <div style="color: red; text-align: center">Tài khoản đã tồn tại</div>  {% endif %}
       <br>
       <form action="/register" method="POST">
         <b> Username:</b> <br />
         <input
           type="text"
           name="username"
+          required
           class="username"
           placeholder="Nhập tên tài khoản..."
         />
@@ -49,6 +51,7 @@
         <input
           type="text"
           name="email"
+          required
           class="email"
           placeholder="Nhập email..."
         />
@@ -57,11 +60,12 @@
           type="password"
           name="password"
           class="password"
+          required
           placeholder="Nhập mật khẩu..."
         />
         <br />
         <button class="custom-button" style="height: 40px; width: 100%" type="submit">Register</button> <br />
-        {% if error: %} Tài khoản đã tồn tại {% endif %}
+
       </form>
     </div>
     <footer>

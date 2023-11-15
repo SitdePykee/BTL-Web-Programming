@@ -1,0 +1,187 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Slab", serif;
+  text-decoration: none;
+}
+
+.custom-button {
+  background-color: white;
+  color: black;
+  transition: all ease 0.5s;
+  border-radius: 20px;
+  height: 40px;
+  width: 200px;
+  font-size: 15px;
+}
+
+.custom-button:hover {
+  background-color: black;
+  color: white;
+}
+
+nav {
+  background-color: rgb(40, 31, 31);
+  margin-left: 10%;
+  display: flex;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(40, 31, 31);
+  padding-right: 5%;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+}
+
+nav a {
+  display: inline-block;
+  justify-self: start;
+  padding: 15px;
+  font-size: 20px;
+  text-decoration: none;
+  color: lightgray;
+}
+
+nav a::after {
+  content: "/";
+  margin-left: 15px;
+  display: block;
+  color: aquamarine;
+  display: inline-block;
+  position: absolute;
+  pointer-events: none;
+}
+
+.parent {
+  display: flex;
+  flex-direction: column;
+}
+
+.child {
+  visibility: hidden;
+  height: 3px;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.parent:hover > a {
+  font-weight: 600;
+}
+
+.parent:hover .child {
+  visibility: visible;
+  font-weight: 600;
+}
+
+.announce {
+  text-align: right;
+  color: lightgray;
+  padding: 15px;
+  font-size: 20px;
+}
+
+header {
+  background-image: url(https://thinhnotes.com/wp-content/uploads/2022/12/cropped-thinhnotes_heading_image_optimized-scaled.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: inherit;
+  text-align: center;
+  color: aliceblue;
+  padding: 15% 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  font-size: 25px;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+  text-align: center;
+  font-size: large;
+}
+
+.description {
+  padding: 20px 20px;
+  width: 39%;
+  text-align: left;
+}
+
+.contact {
+  padding: 20px 20px;
+}
+
+.contact > a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.contact > a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.current {
+  color: rgb(255, 0, 0) !important;
+  border-radius: 1px;
+}
+
+.option {
+  margin: 5px;
+  transition: all 0.5s ease;
+}
+
+.pay-option {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.loginform {
+  background-color: white;
+  padding: 50px;
+  margin: 10% 30% 10% 30%;
+  border-radius: 50px;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+.formhead {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 10%;
+}
+
+.loginform input {
+  background-color: lightgray;
+  width: 100%;
+  padding: 5px 20px;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

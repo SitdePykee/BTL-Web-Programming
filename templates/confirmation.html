@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Night Market</title>
+    <link rel="stylesheet" href="/static/confirmation.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Night Market</h1>
+    </header>
+    <div class="navbar">
+      <nav>
+        <a href="http://127.0.0.1:5000/">Homepage</a>
+        <a href="http://127.0.0.1:5000/search">Search</a>
+        <a href="http://127.0.0.1:5000/cart">My cart</a>
+        <a href="http://127.0.0.1:5000/logout">Logout</a>
+      </nav>
+      <div>
+        <div class="announce">{{username}}</div>
+      </div>
+    </div>
+    <div class="loginform">
+      <div class="formhead">
+        <h1>Xác nhận</h1>
+        <p style="opacity: 0.4">Đơn hàng số #12345</p>
+      </div>
+      <hr />
+      <br />
+      <form action="/confirmation" method="GET">
+        <p><b> Tên người dùng:</b> Huy Hoàng</p>
+        <b> Số điện thoại người nhận:</b> <br />
+        <input required name="phonenumber" placeholder="Nhập số điện thoại..." />
+        <p><b> Giá trị đơn hàng:</b> 180$</p>
+        <b> Địa chỉ giao hàng:</b> <br />
+        <input
+          name="delivery-address"
+          placeholder="Nhập địa chỉ giao hàng..."
+          required
+        />
+        <br />
+        <div class="pay-option">
+          <p><b>Thanh toán: </b></p>
+          <span class="option" id="Visa" onclick="selectOption(this)"
+            ><i class="fab fa-cc-visa" style="font-size: 40px"></i
+          ></span>
+          <span class="option" id="Mastercard" onclick="selectOption(this)"
+            ><i class="fab fa-cc-mastercard" style="font-size: 40px"></i
+          ></span>
+          <span class="option" id="Paypal" onclick="selectOption(this)"
+            ><i class="fab fa-cc-paypal" style="font-size: 40px"></i
+          ></span>
+          <span class="option" id="ApplePay" onclick="selectOption(this)"
+            ><i class="fab fa-cc-apple-pay" style="font-size: 40px"></i
+          ></span>
+          <input name="payment" type="hidden" id="payment" required>
+        </div>
+        <br />
+        <b> Card Number: </b> <br />
+        <input name="delivery-address" required placeholder="Nhập mã số thẻ..." />
+        <div class="buttons">
+          <button class="custom-button">Quay lại giỏ hàng</button>
+          <button class="custom-button" type="submit">Confirm</button>
+        </div>
+      </form>
+
+    </div>
+    <footer>
+      <div class="description">
+        <b>Night Market Shop - Website bán quần áo uy tín số 1 thế giới</b>
+        <br />
+        <hr />
+        <p>
+          Với kinh nghiệm 200 năm buôn bán quần áo, chúng tôi tự tin đem đến cho
+          bạn những trải nghiệm tuyệt vời nhất các bạn có thể tìm thấy trên
+          Internet
+        </p>
+      </div>
+      <div class="contact">
+        <b>Liên hệ</b> <br />
+        <hr />
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a> <br />
+        <a
+          style="width: 200px; border-radius: 20px"
+          href="http://127.0.0.1:3000/BTL-WebDesign/about-us.html"
+        >
+          About Us</a
+        >
+      </div>
+    </footer>
+  </body>
+  <script>
+    var options = document.querySelectorAll(".option");
+
+    function selectOption(option) {
+      var isCurrent = option.classList.contains("current");
+
+      options.forEach(function (elem) {
+        elem.classList.remove("current");
+      });
+
+      if (!isCurrent) {
+        option.classList.add("current");
+      }
+      selectPayment(option.id)
+    }
+    function selectPayment(type){
+      let payment = document.getElementById("payment")
+      payment.value = type
+    }
+  </script>
+</html>
