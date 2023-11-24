@@ -37,7 +37,7 @@
       </div>
       <hr />
       <br />
-      <form action="/confirmation" method="GET">
+      <div>
         <p><b> Tên người dùng:</b>{{ username }}</p>
         <b> Số điện thoại người nhận:</b> <br />
         <input required name="phoneNumber" placeholder="Nhập số điện thoại..." />
@@ -46,7 +46,7 @@
         <input value="{{ product_id }}" type="hidden">
         <b> Địa chỉ giao hàng:</b> <br />
         <input
-          name="delivery-address"
+          id="delivery-address"
           placeholder="Nhập địa chỉ giao hàng..."
           required
         />
@@ -76,9 +76,9 @@
         <script></script>
         <div class="buttons">
           <button class="custom-button" onclick="redirect()">Quay lại giỏ hàng</button>
-          <button class="custom-button" type="submit">Confirm</button>
+          <button class="custom-button" onclick="submit()">Confirm</button>
         </div>
-      </form>
+      </div>
 
     </div>
     <footer>
@@ -120,7 +120,6 @@
 
       if (!isCurrent) {
         option.classList.add("current");
-
         selectPayment(option.id)
         if(option.id == "Visa" || option.id == "Mastercard"){
           document.getElementById("card_number").style.display = "block"
@@ -142,6 +141,36 @@
     }
     function redirect(){
       window.location.href = "http://127.0.0.1:5000/cart"
+    }
+    function submit() {
+      let payment = document.getElementsByClassName("current");
+      payment = payment[0].id
+
+      var currentDate = new Date();
+
+      var day = currentDate.getDate();
+      var month = currentDate.getMonth() + 1;
+      var year = currentDate.getFullYear();
+
+      var formattedDay = day < 10 ? '0' + day : day;
+      var formattedMonth = month < 10 ? '0' + month : month;
+      var formattedYear = year.toString().slice(-2);
+      var dateString = formattedDay + '/' + formattedMonth + '/' + formattedYear;
+      var card_number = document.getElementById("card_number_input").value
+      var address = document.getElementById("delivery-address").value
+
+      let data = {
+        payment: payment,
+        date: dateString,
+        card_number: card_number,
+        address: address
+      }
+
+      fetch("/confirmation/confirm", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {"Content-Type": "application/json"}
+      });
     }
   </script>
 </html>

@@ -58,7 +58,7 @@
               </div>
               <div class="quantity">
                 <div class="amount-input">
-                  <input type="hidden" value="{{ i['id'] }}" >
+                  <input type="hidden" class="product_id" value="{{ i['id'] }}" >
                   <button class="minus" onclick="minus(this)">-</button>
                   <input type="text" class="amount" value="{{ i['quantity'] }}" />
                   <button class="plus" onclick="plus(this)">+</button>
@@ -75,7 +75,7 @@
               >
                 X
               </button>
-              <input type="hidden" class="product_id" value="{{ i['id'] }}" >
+              <input type="hidden"  value="{{ i['id'] }}" >
             </div>
               {% endfor %}
           </div>
@@ -205,13 +205,11 @@
         let ids = []
         let collection = document.getElementsByClassName('product_id');
         for(var i = 0; i < collection.length; i++) {
-          ids.push(collection[i].value);
+          ids.push({id: collection[i].value, amount: collection[i].nextElementSibling.nextElementSibling.value});
         }
-        let product_id = Array.from(ids);
-        product_id = product_id.join(",");
         let total = document.getElementById("total").value
         let data = {
-          product_id: product_id,
+          products: ids,
           total: parseInt(calculateTotal())
         }
         fetch("/confirmation/submit", {

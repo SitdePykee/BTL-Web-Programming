@@ -105,6 +105,19 @@ def get_items_with_categories(category):
     number_of_item = len(current_page_items)
     return current_page_items, total_pages, page, number_of_item
 
+
+def confirmCart(data, address, card_number, date, type):
+    sqldbname = 'db/clothes.db'
+    conn = sqlite3.connect(sqldbname)
+    cursor = conn.cursor()
+    for entry in data["products"]:
+        sqlcommand = "INSERT INTO 'order' VALUES('" + session["username"] + "', " + str(entry["id"]) + ", " + str(entry["amount"]) +  ",'" + address + "', '" + type + "', '" + card_number + "','" + date + "')"
+        print(sqlcommand)
+        cursor.execute(sqlcommand)
+        conn.commit()
+
+    conn.close()
+
 #================================================================================================================================
 
 @app.route("/")
@@ -265,7 +278,9 @@ def update_cart():
 def confirmation_display():
     data = session["order"]
     total = data["total"]
-    product_id = data["product_id"]
+    product_id = []
+    for entry in data["products"]:
+        product_id.append(entry["id"])
     username = session["username"]
 
     return render_template("confirmation.html",total = total, product_id = product_id, username = username)
@@ -275,7 +290,27 @@ def confirmation_submit():
     if "order" not in session:
         session["order"] = []
     session["order"] = data
+
     return render_template("confirmation.html")
+
+@app.route("/confirmation/confirm", methods=['POST'])
+def confirm():
+    print(request.json)
+    data = session["order"]
+    _data = request.json
+    date = _data["date"]
+    type = _data["payment"]
+    address = _data["address"]
+    card_number = _data["card_number"]
+
+    confirmCart(data, address, card_number, date, type)
+    current_page_items, total_pages, page, number_of_item = get_items_default()
+
+
+    return render_template("logged-in-index.html", username=session['username'],
+                                   clothes = current_page_items,total_pages = total_pages, current_page = page,
+                                   number_of_item = number_of_item)
+
 
 #================================================================================================================================
 
