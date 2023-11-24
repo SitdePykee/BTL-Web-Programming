@@ -155,7 +155,15 @@
       var formattedDay = day < 10 ? '0' + day : day;
       var formattedMonth = month < 10 ? '0' + month : month;
       var formattedYear = year.toString().slice(-2);
-      var dateString = formattedDay + '/' + formattedMonth + '/' + formattedYear;
+      var hours = currentDate.getHours();
+      var minutes = currentDate.getMinutes();
+      var seconds = currentDate.getSeconds();
+      var formattedHours = hours < 10 ? '0' + hours : hours;
+      var formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+      var formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+      var dateString = formattedDay + '/' + formattedMonth + '/' + formattedYear + ' ' + formattedHours + ':' + formattedMinutes + ':' + formattedSeconds;
+
+
       var card_number = document.getElementById("card_number_input").value
       var address = document.getElementById("delivery-address").value
 
@@ -170,7 +178,10 @@
         method: "POST",
         body: JSON.stringify(data),
         headers: {"Content-Type": "application/json"}
-      });
+      }).then((e) => {
+          alert("Đã tạo đơn thành công, đơn hàng sẽ được giao trong vài ngày tới");
+          window.location.href = "http://127.0.0.1:5000/"
+        });
     }
   </script>
 </html>
